@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('musician_instruments', function (Blueprint $table) {
+        Schema::create('song_tones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // ID del músico
-            $table->foreignId('instrument_id')->constrained('instruments')->onDelete('cascade'); // ID del instrumento
+            $table->foreignId('song_id')->constrained()->onDelete('cascade');
+            //tono para el cantante
+            $table->string('singer_tone');
+            //id del usuario tipo cantante
+            $table->foreignId('singer_id')->constrained('users')->onDelete('cascade');
+            
+            
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('musician_instruments');
+        Schema::dropIfExists('song_tones');
     }
 };
